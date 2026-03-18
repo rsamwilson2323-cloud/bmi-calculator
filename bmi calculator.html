@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BMI Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: 20px;
+    width: 320px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    text-align: center;
+    color: white;
+}
+
+.container h1 {
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 12px;
+    border: none;
+    font-size: 18px;
+    background: linear-gradient(135deg, #ff512f, #f09819);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.category {
+    font-size: 22px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>💪 BMI Calculator</h1>
+
+    <input type="number" id="weight" placeholder="Weight (kg)">
+    <input type="number" id="height" placeholder="Height (cm)">
+
+    <button onclick="calculateBMI()">Calculate</button>
+
+    <div class="result" id="result"></div>
+    <div class="category" id="category"></div>
+</div>
+
+<script>
+function calculateBMI() {
+    let weight = document.getElementById("weight").value;
+    let height = document.getElementById("height").value;
+
+    if(weight === "" || height === "") {
+        alert("Please enter weight and height");
+        return;
+    }
+
+    height = height / 100;
+    let bmi = (weight / (height * height)).toFixed(2);
+
+    let category = "";
+    let emoji = "";
+
+    if (bmi < 18.5) {
+        category = "Underweight";
+        emoji = "🥗";
+    } else if (bmi < 25) {
+        category = "Normal";
+        emoji = "✅";
+    } else if (bmi < 30) {
+        category = "Overweight";
+        emoji = "⚠️";
+    } else {
+        category = "Obese";
+        emoji = "🚨";
+    }
+
+    document.getElementById("result").innerHTML = `Your BMI: <b>${bmi}</b>`;
+    document.getElementById("category").innerHTML = `${emoji} ${category}`;
+}
+</script>
+
+</body>
+</html>
